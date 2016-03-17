@@ -1,0 +1,31 @@
+{
+  "name": "bundle-fairy",
+  "version": "0.0.1",
+  "description": "Check if ZIP is a bundle and extract",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "eslint bin test *.js",
+    "test": "tape test/*.test.js"
+  },
+  "bin": {
+    "geojson-fairy": "bin/bundle-fairy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapbox/bundle-fairy.git"
+  },
+  "author": "Mapbox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapbox/bundle-fairy/issues"
+  },
+  "homepage": "https://github.com/mapbox/bundle-fairy#readme",
+  "devDependencies": {
+    "tape": "^4.5.1",
+    "eslint": "^2.4.0"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "zipfile": "^0.5.9"
+  }
+}
