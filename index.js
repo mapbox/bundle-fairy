@@ -7,6 +7,20 @@ module.exports.isbundle = isbundle;
 module.exports.extract = extract;
 
 function isbundle(zipfile, callback) {
+
+  // bundle is a zip that can only contain the following file types:
+  // .geojson
+  // .csv
+  // .index (optional since each layer may not need an index (empty features?))
+  // .json (metadata file)
+  // anything other file types means it is not a bundle
+  
+  // not a bundle if:
+  // - contains both geojson and csv files
+  // - contains multiple csv files
+  // - contains multiple layers but no metadata.json file 
+  // (multiple layers means it was converted from a kml/gpx file, and metadata of the original kml/gpx must exist)
+
   try {
     var zf = new zip.ZipFile(zipfile);
     if (zf.count < 2) {
@@ -21,7 +35,6 @@ function isbundle(zipfile, callback) {
 
     //flatten to unique extensions
     ext = ext.filter(function(item, i, ar) { return ar.indexOf(item) === i; });
-
     if (
       ext.indexOf('.shp') > -1
       && ext.indexOf('.shx') > -1
