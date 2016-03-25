@@ -183,6 +183,4 @@ function iszip(zipfile, callback) {
       });
     });
   });
-
-
 }

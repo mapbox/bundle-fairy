@@ -43,9 +43,14 @@ fs.open(zipfile, 'r', function(err, fd) {
       if (err) { return usage_and_exit(err);}
       if (data !== 'PK') { return usage_and_exit('Not a zipfile.'); }
       fairy[cmd](zipfile, function(err, result) {
-        console.log('err:', err);
-        console.log('result:', result);
+        if (err) return fail(err);
+        console.log(result);
       });
     });
   });
 });
+
+function fail(err) {
+  console.error(err.message);
+  process.exit(err.code === 'EINVALID' ? 3 : 1);
+}
