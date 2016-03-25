@@ -15,7 +15,7 @@ test('valid bundles', function(t) {
     q.defer(function(callback) {
       fairy.isbundle(fixtures.valid[k], function(err, output) {
         if (err) throw err;
-        t.true(output, k + ': isbundle returned true');
+        t.true(output, k + ': isbundle returned "' + output + '"');
         callback();
       });
     });
@@ -34,7 +34,7 @@ test('invalid bundles', function(t) {
     q.defer(function(callback) {
       fairy.isbundle(fixtures.invalid[k], function(err, output) {
         if (err) t.equal(err.message, expectations.invalid[k], 'expected error message');
-        t.false(output, k + ': isbundle returned false');
+        t.false(output, k + ': isbundle returned "' + output + '"');
         callback();
       });
     });
