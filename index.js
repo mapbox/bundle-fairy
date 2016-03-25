@@ -10,7 +10,7 @@ function isbundle(zipfile, callback) {
 
   /*
   Assumptions:
-  * must have metadata.json if there are several files of same type (geojson or csv)
+  * must have metadata.json if there are several geojson files of same type
   * may have indicies (small files don't get indices)
   * csv or geojson, but a bundle must contain just one type
   * maybe flat or have max 1 directory
@@ -64,9 +64,6 @@ function isbundle(zipfile, callback) {
 
     //remove directory entry from zf.names
     var file_names = zf.names.filter(function(fname) {
-      // var parsed = path.parse(fname);
-      // return parsed.base !== parsed.name;
-      //return path.basename(fname) !== path.dirname(fname);
       return path.extname(fname) !== '';
     });
 
@@ -126,7 +123,7 @@ function isbundle(zipfile, callback) {
     var has_index = unique_extensions.indexOf('.index') > -1;
 
     //no bundle: single geojson without index
-    if (!has_index && file_type_cnt['.geojson'] === 1) {
+    if (!has_index && !has_metadata && file_type_cnt['.geojson'] === 1) {
       return callback(null, false);
     }
 
