@@ -8,7 +8,7 @@
     "test": "tape test/*.test.js"
   },
   "bin": {
-    "geojson-fairy": "bin/bundle-fairy.js"
+    "bundle-fairy": "bin/bundle-fairy.js"
   },
   "repository": {
     "type": "git",
