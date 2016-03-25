@@ -4,7 +4,6 @@
   "description": "Check if ZIP is a bundle and extract",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint bin test *.js",
     "test": "tape test/*.test.js"
   },
   "bin": {
