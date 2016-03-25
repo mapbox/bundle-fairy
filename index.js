@@ -1,4 +1,3 @@
-var util = require('util');
 var fs = require('fs');
 var path = require('path');
 var zip = require('zipfile');
@@ -73,12 +72,12 @@ function isbundle(zipfile, callback) {
     }
 
     //remove directory names for each query of 'metadata.json';
-    file_names = file_names.map(function(name) { return name.substring(name.indexOf('/') + 1) });
+    file_names = file_names.map(function(name) { return name.substring(name.indexOf('/') + 1); });
 
     var has_metadata = file_names.indexOf('metadata.json') > -1;
 
     //get extensions
-    var extensions = file_names.map(function(name) { return path.extname(name) });
+    var extensions = file_names.map(function(name) { return path.extname(name); });
 
     //flatten to unique extensions
     var unique_extensions = extensions.filter(function(item, i, ar) { return ar.indexOf(item) === i; });
