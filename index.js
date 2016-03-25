@@ -119,18 +119,28 @@ function isbundle(zipfile, callback) {
     }
 
     //no bundle: converted from gpx/kml (1 to n geojsons) and doesn't have metadata.json file
-    if (!has_metadata && unique_extensions.indexOf('.geojson') > -1) {
+    if (!has_metadata && file_type_cnt['.geojson'] > 1) {
+      return callback(null, false);
+    }
+
+    var has_index = unique_extensions.indexOf('.index') > -1;
+
+    //no bundle: single geojson without index
+    if (!has_index && file_type_cnt['.geojson'] === 1) {
       return callback(null, false);
     }
 
     /////bundles start here
 
+    //bundle: single geojson without metadata.json
+    if (!has_metadata && file_type_cnt['.geojson'] === 1) {
+      return callback(null, true);
+    }
+
     //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file
     if (has_metadata && unique_extensions.indexOf('.geojson') > -1) {
       return callback(null, true);
     }
-
-    var has_index = unique_extensions.indexOf('.index');
 
     //bundle: exactly one csv including index
     if (file_type_cnt['.csv'] === 1 && has_index) {
