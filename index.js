@@ -55,11 +55,12 @@ function isbundle(zipfile, callback) {
       return callback(null, false);
     }
 
-    var diretory_levels = get_max_directory_levels(zf.names);
-    //zero or one directory levels allowed
-    if (diretory_levels > 1) {
-      return callback(null, false);
-    }
+    //DISABLE till we've decided on supported directory levels
+    // var diretory_levels = get_max_directory_levels(zf.names);
+    // //zero or one directory levels allowed
+    // if (diretory_levels > 1) {
+    //   return callback(null, false);
+    // }
 
     //remove directory entry from zf.names
     var file_names = zf.names.filter(function(fname) {
@@ -72,7 +73,7 @@ function isbundle(zipfile, callback) {
     }
 
     //remove directory names for each query of 'metadata.json';
-    file_names = file_names.map(function(name) { return name.substring(name.indexOf('/') + 1); });
+    file_names = file_names.map(function(name) { return name.substring(name.lastIndexOf('/') + 1); });
 
     var has_metadata = file_names.indexOf('metadata.json') > -1;
 
@@ -160,14 +161,14 @@ function get_root_dir_count(entry_names) {
   return dir_names.length;
 }
 
-function get_max_directory_levels(entry_names) {
-  if (entry_names[0].indexOf('/') < 0) { return 0; }
-  var max_depth = 0;
-  entry_names.forEach(function(entry_name) {
-    max_depth = Math.max(max_depth, (entry_name.match(/\//g) || []).length);
-  });
-  return max_depth;
-}
+// function get_max_directory_levels(entry_names) {
+//   if (entry_names[0].indexOf('/') < 0) { return 0; }
+//   var max_depth = 0;
+//   entry_names.forEach(function(entry_name) {
+//     max_depth = Math.max(max_depth, (entry_name.match(/\//g) || []).length);
+//   });
+//   return max_depth;
+// }
 
 function iszip(zipfile, callback) {
   fs.open(zipfile, 'r', function(err, fd) {

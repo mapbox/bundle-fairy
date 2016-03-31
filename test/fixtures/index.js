@@ -2,6 +2,8 @@ var path = require('path');
 
 module.exports = {
   valid: {
+    two_directory_levels: path.join(__dirname, 'bundle_2-directory-levels.zip'),
+    lots_of_directory_levels: path.join(__dirname, 'bundle_lots-of-directory-levels.zip'),
     geojson_withindex_withmetadata: path.join(__dirname, 'bundle_geojson-with-indices-with-metadata.zip'),
     geojson_withmetadata_noindex: path.join(__dirname, 'bundle_geojson-without-indices-with-metadata.zip'),
     single_csv_withindex: path.join(__dirname, 'bundle_single-csv-with-index.zip'),
@@ -9,8 +11,7 @@ module.exports = {
     single_geojson_with_metadata: path.join(__dirname, 'bundle_single-geojson-with-metadata-without-index.zip')
   },
   invalid: {
-    two_directory_levels: path.join(__dirname, 'nobundle_2-directory-levels.zip'),
-    two_directories: path.join(__dirname, 'nobundle_2-directories.zip'),
+    two_root_directories: path.join(__dirname, 'nobundle_2-root-directories.zip'),
     without_metadata_or_index: path.join(__dirname, 'nobundle_geojsons-with-indexes-without-metadata.zip'),
     shapefile_withindex: path.join(__dirname, 'nobundle_shape-with-index.zip'),
     shapefile_withoutindex: path.join(__dirname, 'nobundle_shape-without-index.zip'),
