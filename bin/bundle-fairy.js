@@ -33,21 +33,9 @@ var zipfile = args._[1];
 if (!zipfile) { usage_and_exit('No zipfile.'); }
 if (!fs.existsSync(zipfile)) { usage_and_exit('Zipfile does not exist: ' + zipfile); }
 
-fs.open(zipfile, 'r', function(err, fd) {
-  if (err) { throw err; }
-  var buf = new Buffer(2);
-  fs.read(fd, buf, 0, 2, 0, function(err, bytes_read, data) {
-    if (err) { throw err; }
-    data = data.toString();
-    fs.close(fd, function(err) {
-      if (err) { return usage_and_exit(err);}
-      if (data !== 'PK') { return usage_and_exit('Not a zipfile.'); }
-      fairy[cmd](zipfile, function(err, result) {
-        if (err) return fail(err);
-        console.log(result);
-      });
-    });
-  });
+fairy[cmd](zipfile, function(err, result) {
+  if (err) return fail(err);
+  console.log(result);
 });
 
 function fail(err) {
