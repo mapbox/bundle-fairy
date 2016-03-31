@@ -1,6 +1,8 @@
 var fs = require('fs');
 var path = require('path');
+var crypto = require('crypto');
 var zip = require('zipfile');
+var mkdirp = require('mkdirp');
 
 module.exports.isbundle = isbundle;
 module.exports.extract = extract;
@@ -150,8 +152,23 @@ function isbundle(zipfile, callback) {
 }
 
 function extract(zipfile, callback) {
-  console.log('extracting bundle: not implemented');
-  callback(null, true, '/home/bergw/xyz/');
+  isbundle(zipfile, function(err, is_bundle) {
+    if (err) return callback(err);
+
+    var extract_dir = path.join(path.dirname(path.resolve(zipfile)), crypto.randomBytes(8).toString('hex'));
+    var zf = new zip.ZipFile(zipfile);
+    var layer_files = [];
+    zf.names.forEach(function(zip_entry) {
+      var out_file = path.join(extract_dir, zip_entry);
+      if (zip_entry.lastIndexOf('/') === zip_entry.length - 1) {
+        mkdirp.sync(out_file);
+      } else {
+        zf.copyFileSync(zip_entry, out_file);
+        layer_files.push(out_file);
+      }
+    });
+    callback(null, layer_files);
+  });
 }
 
 function get_root_dir_count(entry_names) {
@@ -161,6 +178,7 @@ function get_root_dir_count(entry_names) {
   return dir_names.length;
 }
 
+// comment till we decide on supported directory levels
 // function get_max_directory_levels(entry_names) {
 //   if (entry_names[0].indexOf('/') < 0) { return 0; }
 //   var max_depth = 0;

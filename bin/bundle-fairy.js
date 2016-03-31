@@ -33,6 +33,9 @@ var zipfile = args._[1];
 if (!zipfile) { usage_and_exit('No zipfile.'); }
 if (!fs.existsSync(zipfile)) { usage_and_exit('Zipfile does not exist: ' + zipfile); }
 
+//result:
+//* true|false if command is 'isbundle'
+//* [] of extracted file names/layers
 fairy[cmd](zipfile, function(err, result) {
   if (err) return fail(err);
   console.log(result);
