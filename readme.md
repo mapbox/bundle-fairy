@@ -46,18 +46,18 @@ npm install bundle-fairy
 var fairy = require('bundle-fairy');
 ```
 
-#### check if a file is a bundle, `isBundle()`
+#### `isbundle(path, callback)` - check if a file is a bundle
 
 Returns either `true` or `false`.
 
 ```javascript
-fairy.isBundle('./path/to/bundle.zip', function(err, isbundle) {
+fairy.isbundle('./path/to/bundle.zip', function(err, isbundle) {
   if (err) throw err;
   console.log(isbundle); // true! or false :(
 });
 ```
 
-#### extract a bundle, `extract()`
+#### `extract(path, callback)` - extract a bundle
 
 Returns an `Array` of files within a bundle.
 
