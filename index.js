@@ -164,10 +164,12 @@ function extract(zipfile, callback) {
         mkdirp.sync(out_file);
       } else {
         zf.copyFileSync(zip_entry, out_file);
-        layer_files.push(out_file);
+        if(out_file.match('.geojson$')){
+         layer_files.push(out_file);
+      }
       }
     });
-    callback(null, layer_files);
+    callback(null, layer_files.join(','));
   });
 }
 
