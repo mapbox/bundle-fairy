@@ -152,7 +152,7 @@ function isbundle(zipfile, callback) {
 }
 
 function extract(zipfile, callback) {
-  isbundle(zipfile, function(err, is_bundle) {
+  isbundle(zipfile, function(err) {
     if (err) return callback(err);
 
     var extract_dir = path.join(path.dirname(path.resolve(zipfile)), crypto.randomBytes(8).toString('hex'));
@@ -164,9 +164,9 @@ function extract(zipfile, callback) {
         mkdirp.sync(out_file);
       } else {
         zf.copyFileSync(zip_entry, out_file);
-        if(out_file.match('.geojson$')){
-         layer_files.push(out_file);
-      }
+        if (out_file.match('.geojson$')){
+          layer_files.push(out_file);
+        }
       }
     });
     callback(null, layer_files.join(','));
