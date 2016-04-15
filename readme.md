@@ -1,6 +1,6 @@
 # bundle-fairy
 
-[![Build Status](https://travis-ci.com/mapbox/bundle-fairy.svg?token=wqR3RcWUEprcQ1ttsgiP&branch=master)](https://travis-ci.com/mapbox/bundle-fairy)
+[![Build Status](https://travis-ci.org/mapbox/bundle-fairy.svg?branch=master)](https://travis-ci.org/mapbox/bundle-fairy)
 
 Detect *bundles* of geometry.
 
@@ -84,3 +84,4 @@ npm test
 ```
 
 `¯\_(ツ)_/¯`
+
