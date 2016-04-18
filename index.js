@@ -164,7 +164,7 @@ function extract(zipfile, callback) {
         mkdirp.sync(out_file);
       } else {
         zf.copyFileSync(zip_entry, out_file);
-        if (out_file.match('.geojson$')){
+        if (out_file.match('.geojson$') || out_file.match('.csv$')){
           layer_files.push(out_file);
         }
       }

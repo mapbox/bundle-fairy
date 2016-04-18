@@ -28,6 +28,7 @@
   "dependencies": {
     "minimist": "^1.2.0",
     "zipfile": "^0.5.9",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.2"
   }
 }
