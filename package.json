@@ -8,7 +8,7 @@
     "test": "tape test/*.test.js"
   },
   "bin": {
-    "geojson-fairy": "bin/bundle-fairy.js"
+    "bundle-fairy": "bin/bundle-fairy.js"
   },
   "repository": {
     "type": "git",
@@ -22,10 +22,12 @@
   "homepage": "https://github.com/mapbox/bundle-fairy#readme",
   "devDependencies": {
     "tape": "^4.5.1",
-    "eslint": "^2.4.0"
+    "eslint": "~2.4.0",
+    "queue-async": "^1.0.7"
   },
   "dependencies": {
     "minimist": "^1.2.0",
-    "zipfile": "^0.5.9"
+    "zipfile": "^0.5.9",
+    "mkdirp": "^0.5.1"
   }
 }

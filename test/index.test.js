@@ -1,21 +1,43 @@
 var test = require('tape');
-var path = require('path');
-var fs = require('fs');
-var os = require('os');
-var crypto = require('crypto');
 var fairy = require('..');
+var fixtures = require('./fixtures');
+var expectations = require('./expectations');
+var queue = require('queue-async');
 
-var fixtures = fs.readdirSync(path.join(__dirname, 'fixtures'))
-  .map(function(fixture) { return path.resolve(__dirname, 'fixtures', fixture); });
+test('valid bundles', function(t) {
+  var q = queue();
 
-fixtures.forEach(function(fixture) {
-  test(path.basename(fixture), function(t) {
-    fairy.isbundle(fixture, function(err, result) {
-      var isBundle = path.basename(fixture).split('_')[0] === 'bundle';
-      t.error(err);
-      t.equal(result, isBundle);
-      t.end();
+  Object.keys(fixtures.valid).forEach(function(k) {
+    q.defer(function(callback) {
+      fairy.isbundle(fixtures.valid[k], function(err, output) {
+        if (err) throw err;
+        t.true(output, k + ': isbundle returned "' + output + '"');
+        callback();
+      });
     });
+  });
+
+  q.await(function(err) {
+    if (err) throw err;
+    t.end();
   });
 });
 
+test('invalid bundles', function(t) {
+  var q = queue();
+
+  Object.keys(fixtures.invalid).forEach(function(k) {
+    q.defer(function(callback) {
+      fairy.isbundle(fixtures.invalid[k], function(err, output) {
+        if (err) t.equal(err.message, expectations.invalid[k], 'expected error message');
+        t.false(output, k + ': isbundle returned "' + output + '"');
+        callback();
+      });
+    });
+  });
+
+  q.await(function(err) {
+    if (err) throw err;
+    t.end();
+  });
+});
