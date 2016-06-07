@@ -18,6 +18,7 @@ module.exports = {
     single_csv_withoutindex: path.join(__dirname, 'nobundle_single-csv-without-index.zip'),
     geojson_and_csv: path.join(__dirname, 'nobundle_single-geojson-and-csv.zip'),
     single_geojson_withoutindex: path.join(__dirname, 'nobundle_single-geojson-without-index-without-metadata.zip'),
-    notzip: path.join(__dirname, 'nobundle_states.geojson')
+    notzip: path.join(__dirname, 'nobundle_states.geojson'),
+    einvalid: path.join(__dirname, 'nobundle_corrupt.zip')
   }
 };
