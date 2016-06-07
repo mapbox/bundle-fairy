@@ -43,6 +43,14 @@ test('invalid bundles', function(t) {
   });
 });
 
+test('invalid: proper exit code', function(t) {
+  fairy.isbundle(fixtures.invalid['einvalid'], function(err) {
+    if (err) t.equal(err.message, 'Invalid zipfile', 'expected error message');
+    t.equal(err.code, 'EINVALID', 'expected error code');
+    t.end();
+  });
+});
+
 test('extract: single csv layer', function(t) {
   fairy.extract(fixtures.valid.single_csv_withindex, function(err, output) {
     if (err) throw err;

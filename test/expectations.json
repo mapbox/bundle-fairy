@@ -1,5 +1,6 @@
 {
   "invalid": {
-    "notzip": "Invalid zipfile"
+    "notzip": "Invalid zipfile",
+    "einvalid": "Invalid zipfile"
   }
 }

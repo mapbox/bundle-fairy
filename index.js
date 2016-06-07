@@ -43,7 +43,7 @@ function isbundle(zipfile, callback) {
       var zf = new zip.ZipFile(zipfile);
     }
     catch (err) {
-      return callback(new Error('Invalid zipfile'));
+      return callback(invalid('Invalid zipfile'));
     }
 
     //empty zip
@@ -199,9 +199,15 @@ function iszip(zipfile, callback) {
       fs.close(fd, function(err) {
         if (err) return callback(err);
         data = data.toString();
-        if (data !== 'PK') { return callback(new Error('Invalid zipfile')); }
+        if (data !== 'PK') { return callback(invalid('Invalid zipfile')); }
         return callback();
       });
     });
   });
+}
+
+function invalid(msg) {
+  var err = new Error(msg);
+  err.code = 'EINVALID';
+  return err;
 }
