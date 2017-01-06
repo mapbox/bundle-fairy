@@ -34,7 +34,7 @@ function isbundle(zipfile, callback) {
   430bc2fe1cf6903d/layer2.geojson.index
    */
 
-  var allowed_files = ['.geojson', '.csv', '.index', '.json'];
+  var allowed_files = ['.geojson', '.csv', '.index', '.json', '.kml', '.gpx'];
 
   iszip(zipfile, function(err) {
     if (err) { return callback(err); }
