@@ -41,7 +41,6 @@ function isbundle(zipfile, callback) {
 
     try {
       var zf = new zip.ZipFile(zipfile);
-//      console.log(zf)
     }
     catch (err) {
       return callback(invalid('Invalid zipfile'));

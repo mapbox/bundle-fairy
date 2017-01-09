@@ -11,7 +11,6 @@ test('valid bundles', function(t) {
   Object.keys(fixtures.valid).forEach(function(k) {
     q.defer(function(callback) {
       fairy.isbundle(fixtures.valid[k], function(err, output) {
-        console.log(err);
         if (err) throw err;
         t.true(output, k + ': isbundle returned "' + output + '"');
         callback();
@@ -20,6 +19,7 @@ test('valid bundles', function(t) {
   });
 
   q.await(function(err) {
+    console.log(err);
     if (err) throw err;
     t.end();
   });
