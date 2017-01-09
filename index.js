@@ -85,16 +85,16 @@ function isbundle(zipfile, callback) {
     //flatten to unique extensions
     var unique_extensions = extensions.filter(function(item, i, ar) { return ar.indexOf(item) === i; });
 
-    //check, if there are other (unsupported) file type, e.g. shape file
-    var not_allowed = false;
-    unique_extensions.forEach(function(extension) {
-      if (allowed_files.indexOf(extension) < 0) {
-        not_allowed = true;
-      }
-    });
-    if (not_allowed) {
-      return callback(null, false);
-    }
+    // //check, if there are other (unsupported) file type, e.g. shape file
+    // var not_allowed = false;
+    // unique_extensions.forEach(function(extension) {
+    //   if (allowed_files.indexOf(extension) < 0) {
+    //     not_allowed = true;
+    //   }
+    // });
+    // if (not_allowed) {
+    //   return callback(null, false);
+    // }
 
     //no bundle: no geojson OR csv included, maybe faulty file with just '.index' and/or 'metadata.json'
     if (unique_extensions.indexOf('.geojson') < 0 && unique_extensions.indexOf('.csv') < 0) {
@@ -123,6 +123,7 @@ function isbundle(zipfile, callback) {
     }
 
     var has_index = unique_extensions.indexOf('.index') > -1;
+    var has_archivedfile = unique_extensions.indexOf('.kml') > -1 || unique_extensions.indexOf('.gpx') > -1;
 
     //no bundle: single geojson without index
     if (!has_index && !has_metadata && file_type_cnt['.geojson'] === 1) {
@@ -138,6 +139,11 @@ function isbundle(zipfile, callback) {
 
     //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file
     if (has_metadata && unique_extensions.indexOf('.geojson') > -1) {
+      return callback(null, true);
+    }
+
+    //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file and archived gpx/kml file
+    if (has_archivedfile && has_metadata && unique_extensions.indexOf('.geojson') > -1) {
       return callback(null, true);
     }
 
