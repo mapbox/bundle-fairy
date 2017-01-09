@@ -9,8 +9,8 @@ module.exports = {
     single_csv_withindex: path.join(__dirname, 'bundle_single-csv-with-index.zip'),
     single_geojson_withindex: path.join(__dirname, 'bundle_single-geojson-with-index.zip'),
     single_geojson_with_metadata: path.join(__dirname, 'bundle_single-geojson-with-metadata-without-index.zip'),
-    with_archived_kml: path.join(__dirname, 'bundle_kml-with-geojson-and-metadata.zip'),
-    with_archived_gpx: path.join(__dirname, 'bundle_gpx-with-geojson-and-metadata.zip')
+    with_archived_kml: path.join(__dirname, 'bundle_with-archived-kml.zip'),
+    with_archived_gpx: path.join(__dirname, 'bundle_with-archived-gpx.zip')
   },
   invalid: {
     two_root_directories: path.join(__dirname, 'nobundle_2-root-directories.zip'),
