@@ -41,6 +41,7 @@ function isbundle(zipfile, callback) {
 
     try {
       var zf = new zip.ZipFile(zipfile);
+//      console.log(zf)
     }
     catch (err) {
       return callback(invalid('Invalid zipfile'));
@@ -85,16 +86,16 @@ function isbundle(zipfile, callback) {
     //flatten to unique extensions
     var unique_extensions = extensions.filter(function(item, i, ar) { return ar.indexOf(item) === i; });
 
-    // //check, if there are other (unsupported) file type, e.g. shape file
-    // var not_allowed = false;
-    // unique_extensions.forEach(function(extension) {
-    //   if (allowed_files.indexOf(extension) < 0) {
-    //     not_allowed = true;
-    //   }
-    // });
-    // if (not_allowed) {
-    //   return callback(null, false);
-    // }
+    //check, if there are other (unsupported) file type, e.g. shape file
+    var not_allowed = false;
+    unique_extensions.forEach(function(extension) {
+      if (allowed_files.indexOf(extension) < 0) {
+        not_allowed = true;
+      }
+    });
+    if (not_allowed) {
+      return callback(null, false);
+    }
 
     //no bundle: no geojson OR csv included, maybe faulty file with just '.index' and/or 'metadata.json'
     if (unique_extensions.indexOf('.geojson') < 0 && unique_extensions.indexOf('.csv') < 0) {
