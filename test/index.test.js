@@ -19,7 +19,6 @@ test('valid bundles', function(t) {
   });
 
   q.await(function(err) {
-    console.log(err);
     if (err) throw err;
     t.end();
   });
