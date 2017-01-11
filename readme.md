@@ -7,7 +7,7 @@ Detect *bundles* of geometry.
 #### What is a bundle?
 A *bundle* is a compressed (zipped `.zip`) directory containing either:
 - A collection of GeoJSON files relating back to their original source, plus correlating index files if needed ([produced by Mapnik](https://github.com/mapnik/mapnik/tree/master/utils/mapnik-index)).
-- A single CSV/GeoJSON file, plus its correlating index file ([produced by Mapnik](https://github.com/mapnik/mapnik/tree/master/utils/mapnik-index)). 
+- A single CSV/GeoJSON file, plus its correlating index file ([produced by Mapnik](https://github.com/mapnik/mapnik/tree/master/utils/mapnik-index)).
 
 Bunldes are used as an in-between format for two cases:
 
@@ -26,6 +26,7 @@ A *bundle* MAY include:
 * one or more spatial index files (`.index`)
 * a `metadata.json` file, which is exactly the [output of `mapnik-omnivore`](https://github.com/mapbox/mapnik-omnivore#example-of-returned-metadata)
 * nested directories of files (infinite depth)
+* for GPX/KML sources, an archived copy of the original file  
 
 A *bundle* MAY NOT include:
 
@@ -84,4 +85,3 @@ npm test
 ```
 
 `¯\_(ツ)_/¯`
-
