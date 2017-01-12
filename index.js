@@ -34,7 +34,7 @@ function isbundle(zipfile, callback) {
   430bc2fe1cf6903d/layer2.geojson.index
    */
 
-  var allowed_files = ['.geojson', '.csv', '.index', '.json'];
+  var allowed_files = ['.geojson', '.csv', '.index', '.json', '.kml', '.gpx'];
 
   iszip(zipfile, function(err) {
     if (err) { return callback(err); }
@@ -136,7 +136,7 @@ function isbundle(zipfile, callback) {
       return callback(null, true);
     }
 
-    //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file
+    //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file (and can have archived gpx/kml file)
     if (has_metadata && unique_extensions.indexOf('.geojson') > -1) {
       return callback(null, true);
     }
