@@ -137,13 +137,8 @@ function isbundle(zipfile, callback) {
       return callback(null, true);
     }
 
-    //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file
+    //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file (and can have archived gpx/kml file)
     if (has_metadata && unique_extensions.indexOf('.geojson') > -1) {
-      return callback(null, true);
-    }
-
-    //bundle: converted from gpx/kml (1 to n geojsons) and has metadata.json file and archived gpx/kml file
-    if (has_archivedfile && has_metadata && unique_extensions.indexOf('.geojson') > -1) {
       return callback(null, true);
     }
 
