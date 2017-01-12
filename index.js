@@ -123,7 +123,6 @@ function isbundle(zipfile, callback) {
     }
 
     var has_index = unique_extensions.indexOf('.index') > -1;
-    var has_archivedfile = unique_extensions.indexOf('.kml') > -1 || unique_extensions.indexOf('.gpx') > -1;
 
     //no bundle: single geojson without index
     if (!has_index && !has_metadata && file_type_cnt['.geojson'] === 1) {
