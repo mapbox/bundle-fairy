@@ -52,12 +52,14 @@ test('invalid: proper exit code', function(t) {
 });
 
 test('extract: single csv layer', function(t) {
-  fairy.extract(fixtures.valid.single_csv_withindex, function(err, output) {
+  fairy.extract(fixtures.valid.single_csv_withindex, function(err, uri, files) {
     if (err) throw err;
 
-    var layers = output.split(',');
+    var layers = files.split(',');
+    t.equal(uri[uri.length - 1], '/', 'returns a directory uri');
+    t.true(uri.indexOf('bundle_single-csv-with-index/') > -1, 'returns expected uri directory');
     t.equal(layers.length, 1, 'expected number of layers');
-    t.true(output.indexOf('bundle_single-csv-with-index/states.sm.csv') > -1, 'outputs expected layer(s)');
+    t.true(files.indexOf('bundle_single-csv-with-index/states.sm.csv') > -1, 'outputs expected layer(s)');
 
     cleanup(layers);
 
@@ -75,12 +77,14 @@ test('extract: single csv layer', function(t) {
 });
 
 test('extract: single geojson layer', function(t) {
-  fairy.extract(fixtures.valid.single_geojson_with_metadata, function(err, output) {
+  fairy.extract(fixtures.valid.single_geojson_with_metadata, function(err, uri, files) {
     if (err) throw err;
 
-    var layers = output.split(',');
+    var layers = files.split(',');
+    t.equal(uri[uri.length - 1], '/', 'returns a directory uri');
+    t.true(uri.indexOf('bundle_single-geojson-with-metadata-without-index/') > -1, 'returns expected uri directory');
     t.equal(layers.length, 1, 'expected number of layers');
-    t.true(output.indexOf('bundle_single-geojson-with-metadata-without-index/states-1.geojson') > -1, 'outputs expected layer(s)');
+    t.true(files.indexOf('bundle_single-geojson-with-metadata-without-index/states-1.geojson') > -1, 'extracts expected layer(s)');
 
     cleanup(layers);
 
@@ -98,13 +102,15 @@ test('extract: single geojson layer', function(t) {
 });
 
 test('extract: multiple geojson layers', function(t) {
-  fairy.extract(fixtures.valid.geojson_withindex_withmetadata, function(err, output) {
+  fairy.extract(fixtures.valid.geojson_withindex_withmetadata, function(err, uri, files) {
     if (err) throw err;
 
-    var layers = output.split(',');
+    var layers = files.split(',');
     t.equal(layers.length, 2, 'expected number of layers');
-    t.true(output.indexOf('bundle_geojson-with-indices-and-metadata/states-1.geojson') > -1, 'outputs expected layer(s)');
-
+    t.equal(uri[uri.length - 1], '/', 'returns a directory uri');
+    t.true(uri.indexOf('bundle_geojson-with-indices-and-metadata/') > -1, 'returns expected uri directory');
+    t.true(files.indexOf('bundle_geojson-with-indices-and-metadata/states-1.geojson') > -1, 'outputs expected layer(s)');
+    t.true(files.indexOf('bundle_geojson-with-indices-and-metadata/states-2.geojson') > -1, 'outputs expected layer(s)');
     cleanup(layers);
 
     function cleanup(layers) {

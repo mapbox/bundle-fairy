@@ -158,10 +158,13 @@ function extract(zipfile, callback) {
     var extract_dir = path.join(path.dirname(path.resolve(zipfile)), crypto.randomBytes(8).toString('hex'));
     var zf = new zip.ZipFile(zipfile);
     var layer_files = [];
+    var final_uri;
+
     zf.names.forEach(function(zip_entry) {
       var out_file = path.join(extract_dir, zip_entry);
       if (zip_entry.lastIndexOf('/') === zip_entry.length - 1) {
         mkdirp.sync(out_file);
+        final_uri = out_file;
       } else {
         zf.copyFileSync(zip_entry, out_file);
         if (out_file.match('.geojson$') || out_file.match('.csv$')){
@@ -169,7 +172,9 @@ function extract(zipfile, callback) {
         }
       }
     });
-    callback(null, layer_files.join(','));
+
+    // Third arg included only for tests, to verify extraction is working properly
+    callback(null, final_uri, layer_files.join(','));
   });
 }
 
