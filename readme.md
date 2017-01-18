@@ -36,7 +36,7 @@ A *bundle* MAY NOT include:
 # Install
 
 ```
-npm install bundle-fairy
+npm install @mapbox/bundle-fairy
 ```
 
 # Usage
@@ -44,7 +44,7 @@ npm install bundle-fairy
 ### Require
 
 ```javascript
-var fairy = require('bundle-fairy');
+var fairy = require('@mapbox/bundle-fairy');
 ```
 
 #### check if a file is a bundle, `isBundle()`
