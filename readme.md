@@ -60,7 +60,7 @@ fairy.isBundle('./path/to/file.zip', function(err, isbundle) {
 ```javascript
 // ***** exact output of this function is yet to be determined *****
 
-fairy.isBundle('./path/to/file.zip', function(err, uri) {
+fairy.extract('./path/to/file.zip', function(err, uri) {
   if (err) throw err;
   console.log(uri); // uri string to extracted directory
 });
