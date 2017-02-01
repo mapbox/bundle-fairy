@@ -58,29 +58,37 @@ fairy.isBundle('./path/to/file.zip', function(err, isbundle) {
 
 #### extract a bundle, `extract()`
 ```javascript
-// ***** exact output of this function is yet to be determined *****
-
-fairy.isBundle('./path/to/file.zip', function(err, uri) {
+fairy.extract('./path/to/file.zip', function(err, result) {
   if (err) throw err;
-  console.log(uri); // uri string to extracted directory
+  console.log(result); // comma separated list of files within the bundle
+});
+```
+
+You can pass in the `dirname` option to just get the full directory path back:
+
+```javascript
+fairy.extract('./path/to/file.zip', { dirname: true }, function(err, result) {
+  if (err) throw err;
+  console.log(result); // /User/waka/files/tmp-bundle
 });
 ```
 
 ### CLI Usage
 
 **Check if is bundle**
-```
+```shell
 $ bundle-fairy isbundle <zipfile>
 ```
 
 **Extract bundle**
-```
+```shell
 $ bundle-fairy extract <zipfile>
+$ bundle-fairy extract <zipfile> --dirname # returns just directory name
 ```
 
 # Test
 
-```bash
+```shell
 npm test
 ```
 
