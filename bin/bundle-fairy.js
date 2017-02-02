@@ -9,6 +9,7 @@ function usage() {
   console.error('');
   console.error('Options:');
   console.error(' -o, --outfile: specify an output file path');
+  console.error(' -d, --dirname: (only for extract) output just the directory name instead of a list of bundled files');
   console.error(' -v, --verbose: verbose error messages');
   console.error(' -h, --help: show this message');
   console.error('');
@@ -33,10 +34,13 @@ var zipfile = args._[1];
 if (!zipfile) { usage_and_exit('No zipfile.'); }
 if (!fs.existsSync(zipfile)) { usage_and_exit('Zipfile does not exist: ' + zipfile); }
 
+var options = {};
+options.dirname = args.d || args.dirname || false;
+
 //result:
 //* true|false if command is 'isbundle'
 //* [] of extracted file names/layers
-fairy[cmd](zipfile, function(err, result) {
+fairy[cmd](zipfile, options, function(err, result) {
   if (err) return fail(err);
   console.log(result);
 });

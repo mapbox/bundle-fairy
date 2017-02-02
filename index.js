@@ -7,7 +7,7 @@ var mkdirp = require('mkdirp');
 module.exports.isbundle = isbundle;
 module.exports.extract = extract;
 
-function isbundle(zipfile, callback) {
+function isbundle(zipfile, options, callback) {
 
   /*
   Assumptions:
@@ -33,6 +33,8 @@ function isbundle(zipfile, callback) {
   430bc2fe1cf6903d/layer2.geojson
   430bc2fe1cf6903d/layer2.geojson.index
    */
+
+  if (typeof options === 'function') callback = options;
 
   var allowed_files = ['.geojson', '.csv', '.index', '.json', '.kml', '.gpx'];
 
@@ -151,13 +153,17 @@ function isbundle(zipfile, callback) {
   });
 }
 
-function extract(zipfile, callback) {
+function extract(zipfile, options, callback) {
+
+  if (typeof options === 'function') callback = options;
+
   isbundle(zipfile, function(err) {
     if (err) return callback(err);
 
     var extract_dir = path.join(path.dirname(path.resolve(zipfile)), crypto.randomBytes(8).toString('hex'));
     var zf = new zip.ZipFile(zipfile);
     var layer_files = [];
+
     zf.names.forEach(function(zip_entry) {
       var out_file = path.join(extract_dir, zip_entry);
       if (zip_entry.lastIndexOf('/') === zip_entry.length - 1) {
@@ -169,7 +175,9 @@ function extract(zipfile, callback) {
         }
       }
     });
-    callback(null, layer_files.join(','));
+
+    if (options && options.dirname) return callback(null, extract_dir);
+    return callback(null, layer_files.join(','));
   });
 }
 
