@@ -47,12 +47,12 @@ npm install @mapbox/bundle-fairy
 var fairy = require('@mapbox/bundle-fairy');
 ```
 
-#### check if a file is a bundle, `isBundle()`
+#### check if a file is a bundle, `isbundle()`
 
 ```javascript
-fairy.isBundle('./path/to/file.zip', function(err, isbundle) {
+fairy.isbundle('./path/to/file.zip', function(err, isbundle) {
   if (err) throw err;
-  console.log(isbundle); // true! or false :(
+  console.log(isbundle); // `true` or `false`
 });
 ```
 
