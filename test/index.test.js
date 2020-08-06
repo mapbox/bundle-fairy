@@ -56,7 +56,7 @@ test('invalid bundles', function(t) {
 });
 
 test('invalid: proper exit code', function(t) {
-  fairy.isbundle(fixtures.invalid['einvalid'], function(err) {
+  fairy.isbundle(fixtures.invalid['einvalid'], function(err, waka) {
     if (err) t.equal(err.message, 'Invalid zipfile', 'expected error message');
     t.equal(err.code, 'EINVALID', 'expected error code');
     t.end();
