@@ -201,7 +201,7 @@ function get_root_dir_count(entry_names) {
 function iszip(zipfile, callback) {
   fs.open(zipfile, 'r', function(err, fd) {
     if (err) { throw err; }
-    var buf = new Buffer(2);
+    var buf = new Buffer.alloc(2);
     fs.read(fd, buf, 0, 2, 0, function(err, bytes_read, data) {
       if (err) { return callback(err); }
       fs.close(fd, function(err) {
