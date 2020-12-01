@@ -1,6 +1,6 @@
 # bundle-fairy
 
-[![Build Status](https://travis-ci.org/mapbox/bundle-fairy.svg?branch=master)](https://travis-ci.org/mapbox/bundle-fairy)
+[![Build Status](https://travis-ci.com/mapbox/bundle-fairy.svg?branch=master)](https://travis-ci.com/mapbox/bundle-fairy)
 
 Detect *bundles* of geometry.
 
