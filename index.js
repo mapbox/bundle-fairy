@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var crypto = require('crypto');
-var zip = require('zipfile');
+var AdmZip = require('adm-zip');
 var mkdirp = require('mkdirp');
 
 module.exports.isbundle = isbundle;
@@ -42,18 +42,21 @@ function isbundle(zipfile, options, callback) {
     if (err) { return callback(err); }
 
     try {
-      var zf = new zip.ZipFile(zipfile);
+      var zf = new AdmZip(zipfile);
+      var entries = zf.getEntries();
     }
     catch (err) {
+      console.log(err);
       return callback(invalid('Invalid zipfile'));
     }
 
     //empty zip
-    if (zf.count === 0) {
+    var names = entries.map(function(e) { return e.entryName; });
+    if (names === 0) {
       return callback(null, false);
     }
 
-    var directory_cnt = get_root_dir_count(zf.names);
+    var directory_cnt = get_root_dir_count(names);
     //only one root directory allowed
     if (directory_cnt > 1) {
       return callback(null, false);
@@ -67,7 +70,7 @@ function isbundle(zipfile, options, callback) {
     // }
 
     //remove directory entry from zf.names
-    var file_names = zf.names.filter(function(fname) {
+    var file_names = names.filter(function(fname) {
       return path.extname(fname) !== '';
     });
 
@@ -161,15 +164,16 @@ function extract(zipfile, options, callback) {
     if (err) return callback(err);
 
     var extract_dir = path.join(path.dirname(path.resolve(zipfile)), crypto.randomBytes(8).toString('hex'));
-    var zf = new zip.ZipFile(zipfile);
+    var zf = new AdmZip(zipfile);
+    var names = zf.getEntries().map(function(e) { return e.entryName; });
     var layer_files = [];
 
-    zf.names.forEach(function(zip_entry) {
+    names.forEach(function(zip_entry) {
       var out_file = path.join(extract_dir, zip_entry);
       if (zip_entry.lastIndexOf('/') === zip_entry.length - 1) {
         mkdirp.sync(out_file);
       } else {
-        zf.copyFileSync(zip_entry, out_file);
+        zf.extractEntryTo(zip_entry, out_file);
         if (out_file.match('.geojson$') || out_file.match('.csv$')){
           layer_files.push(out_file);
         }
@@ -201,7 +205,7 @@ function get_root_dir_count(entry_names) {
 function iszip(zipfile, callback) {
   fs.open(zipfile, 'r', function(err, fd) {
     if (err) { throw err; }
-    var buf = new Buffer(2);
+    var buf = new Buffer.alloc(2);
     fs.read(fd, buf, 0, 2, 0, function(err, bytes_read, data) {
       if (err) { return callback(err); }
       fs.close(fd, function(err) {
