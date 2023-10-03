@@ -46,7 +46,6 @@ function isbundle(zipfile, options, callback) {
       var entries = zf.getEntries();
     }
     catch (err) {
-      console.log(err);
       return callback(invalid('Invalid zipfile'));
     }
 
