@@ -171,9 +171,9 @@ function extract(zipfile, options, callback) {
     names.forEach(function(zip_entry) {
       var out_file = path.join(extract_dir, zip_entry);
       if (zip_entry.lastIndexOf('/') === zip_entry.length - 1) {
-        mkdirp.sync(out_file);
+        mkdirp.sync(extract_dir);
       } else {
-        zf.extractEntryTo(zip_entry, out_file);
+        zf.extractEntryTo(zip_entry, extract_dir, true, false, false, zip_entry);
         if (out_file.match('.geojson$') || out_file.match('.csv$')){
           layer_files.push(out_file);
         }
