@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/bundle-fairy",
-  "version": "0.2.0-dev3",
+  "version": "0.2.0-dev4",
   "description": "Check if ZIP is a bundle and extract",
   "main": "index.js",
   "scripts": {
