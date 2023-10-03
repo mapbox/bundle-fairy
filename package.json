@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/bundle-fairy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Check if ZIP is a bundle and extract",
   "main": "index.js",
   "scripts": {
@@ -26,8 +26,8 @@
     "queue-async": "^1.0.7"
   },
   "dependencies": {
+    "adm-zip": "^0.5.10",
     "minimist": "^1.2.0",
-    "zipfile": "^0.5.9",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.5.2"
   }
