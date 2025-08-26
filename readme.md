@@ -1,6 +1,6 @@
 # bundle-fairy
 
-[![Build Status](https://travis-ci.com/mapbox/bundle-fairy.svg?branch=master)](https://travis-ci.com/mapbox/bundle-fairy)
+[![Node.js CI](https://github.com/mapbox/bundle-fairy/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/mapbox/bundle-fairy/actions/workflows/test.yml)
 
 Detect *bundles* of geometry.
 
