@@ -1,3 +1,5 @@
+⚠️ This repository is no longer actively maintained by Mapbox.  
+
 # bundle-fairy
 
 Detect *bundles* of geometry.
