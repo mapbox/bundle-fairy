@@ -1,6 +1,6 @@
-# bundle-fairy
+⚠️ This repository is no longer actively maintained by Mapbox.  
 
-[![Build Status](https://travis-ci.com/mapbox/bundle-fairy.svg?branch=master)](https://travis-ci.com/mapbox/bundle-fairy)
+# bundle-fairy
 
 Detect *bundles* of geometry.
 
